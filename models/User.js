@@ -3,19 +3,17 @@ const dateFormat = require('../utils/dateFormat');
 
 const UserSchema = new Schema(
   {
-    createdAt: {
-      type: Date,
-      default: Date.now
-    },
     username: {
       type: String,
+      unique: true,
       required: true,
       trim: true
     },
     email: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
+      match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/]
     },
     thoughts: [      
     {
