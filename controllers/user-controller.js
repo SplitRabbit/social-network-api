@@ -1,6 +1,13 @@
 const { User } = require('../models');
 
 const UserController = {
+    // createUser
+    createUser({ body }, res) {
+      User.create(body)
+        .then(dbUserData => res.json(dbUserData))
+        .catch(err => res.json(err));
+    },
+    
   // get all Users
   getAllUser(req, res) {
     User.find({})
@@ -31,12 +38,7 @@ const UserController = {
       });
   },
 
-  // createUser
-  createUser({ body }, res) {
-    User.create(body)
-      .then(dbUserData => res.json(dbUserData))
-      .catch(err => res.json(err));
-  },
+
 
   // update User by id
   updateUser({ params, body }, res) {
