@@ -6,12 +6,13 @@ const ThoughtSchema = new Schema(
     thoughtText: {
         type: String,
         required: true,
-        //Must be between 1 and 280 characters
+        maxlength: 280,
+        minlength: 1
       },
     createdAt: {
       type: Date,
-      default: Date.now
-      //Use a getter method to format the timestamp on query
+      default: Date.now,
+      get: createdAtVal => dateFormat(createdAtVal)
     },
     Thoughtname: {
       type: String,
@@ -32,14 +33,14 @@ const ThoughtSchema = new Schema(
 
 const ReactionSchema = new Schema(
     {
-      // set custom id to avoid confusion with parent comment _id
       reactionId: {
         type: Schema.Types.ObjectId,
         default: () => new Types.ObjectId()
       },
       reactionBody: {
         type: String,
-        required: true
+        required: true,
+        maxlength: 280
       },
       username: {
         type: String,
@@ -59,13 +60,10 @@ const ReactionSchema = new Schema(
     }
   );
 
-// get total count of comments and replies on retrieval
-ThoughtSchema.virtual('reactioncount').get(function() {
-    return this.reactions.reduce(
-      (total, reaction) => total + reaction.replies.length + 1,
-      0
-    );
-  });
+// get total count of reactions
+ThoughtsSchema.virtual('reactionCount').get(function() {
+    return this.reactions.length;
+});
 
 const Thought = model('Thought', PizzaSchema);
 

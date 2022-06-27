@@ -38,14 +38,11 @@ const UserSchema = new Schema(
   }
 );
 
-// get total count of comments and replies on retrieval
-UserSchema.virtual('friendcount').get(function() {
-  return this.friends.reduce(
-    (total, friends) => total + comment.replies.length + 1,
-    0
-  );
+// get total count of friends
+ThoughtsSchema.virtual('reactionCount').get(function() {
+  return this.friends.length;
 });
 
-const User = model('User', PizzaSchema);
+const User = model('User', UserSchema);
 
 module.exports = User;
