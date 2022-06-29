@@ -53,7 +53,7 @@ const thoughtController = {
 
     // Update a current thought by ID
     updateThought({params, body}, res) {
-        Thought.findOneAndUpdate({_id: params.id}, body, {new: true, runValidators: true})
+        Thought.findOneAndUpdate({_id: params.id}, body, {new: true})
         .populate({path: 'reactions', select: '-__v'})
         .select('-___v')
         .then(dbThoughtData => {
