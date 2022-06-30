@@ -7,7 +7,7 @@ const UserController = {
         .then(dbUserData => res.json(dbUserData))
         .catch(err => res.json(err));
     },
-    
+
   // get all Users
   getAllUser(req, res) {
     User.find({})
@@ -62,7 +62,7 @@ const UserController = {
 
 //add friend
 addFriend({params}, res) {
-  Users.findOneAndUpdate({_id: params.id}, {$push: { friends: params.friendId}}, {new: true})
+  User.findOneAndUpdate({_id: params.id}, {$push: { friends: params.friendId}}, {new: true})
   .populate({path: 'friends', select: ('-__v')})
   .select('-__v')
   .then(dbUsersData => {
@@ -77,7 +77,7 @@ addFriend({params}, res) {
 
 // Delete a current Friend
   deleteFriend({ params }, res) {
-    Users.findOneAndUpdate({_id: params.id}, {$pull: { friends: params.friendId}}, {new: true})
+    User.findOneAndUpdate({_id: params.id}, {$pull: { friends: params.friendId}}, {new: true})
     .populate({path: 'friends', select: '-__v'})
     .select('-__v')
     .then(dbUsersData => {

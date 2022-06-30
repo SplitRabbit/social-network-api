@@ -43,10 +43,6 @@ const ThoughtSchema = new Schema(
       default: Date.now,
       get: createdAtVal => dateFormat(createdAtVal)
     },
-    Thoughtname: {
-      type: String,
-      required: true
-    },
     //Array of nested documents created with the reactionSchema
     reactions: [ReactionSchema]
   },
