@@ -1,5 +1,5 @@
 // Require Thought and Users Models
-const {Thought, Users} = require('../models');
+const {Thought, User} = require('../models');
 
 // Set up Thought Controller
 const thoughtController = {
