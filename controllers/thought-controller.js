@@ -8,11 +8,11 @@ const thoughtController = {
     createThought({body}, res) {
         Thought.create(body)
         .then(({_id}) => {
-            return Users.findOneAndUpdate({ _id: body.userId}, {$push: {thoughts: _id}}, {new: true});
+             Users.findOneAndUpdate({ _id: body.userId}, {$push: {thoughts: _id}}, {new: true});
         })
         .then(dbThoughtData => {
             if(!dbThoughtData) {
-                res.status(404).json({message: 'No Thought with this particular ID!'});
+                res.status(404).json({message: 'No User with this particular ID!'});
                 return;
             }
             res.json(dbThoughtData)
