@@ -8,7 +8,7 @@ const thoughtController = {
     createThought({body}, res) {
         Thought.create(body)
         .then(({_id}) => {
-             User.findOneAndUpdate({ _id: body.userId}, {$push: {thoughts: _id}}, {new: true});
+              return User.findOneAndUpdate({ _id: body.userId}, {$push: {thoughts: _id}}, {new: true});
         })
         .then(dbThoughtData => {
             if(!dbThoughtData) {

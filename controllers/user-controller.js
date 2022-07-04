@@ -7,7 +7,6 @@ const UserController = {
         .then(dbUserData => res.json(dbUserData))
         .catch(err => res.json(err));
     },
-
   // get all Users
   getAllUser(req, res) {
     User.find({})
